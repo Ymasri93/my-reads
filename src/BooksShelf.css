@@ -1,0 +1,13 @@
+#miniwrapper {
+  display: flex;
+}
+
+.bookshelf {
+  background-color: #d06a00;
+  background-image: url('https://www.transparenttextures.com/patterns/wood-pattern.png');
+  width: 500px;
+  height: 20px;
+  margin-bottom: 50px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 20px;
+}
