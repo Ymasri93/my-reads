@@ -1,0 +1,14 @@
+.book {
+  display: flex;
+  flex-direction: column;
+  margin-right: 25px;
+}
+
+.book-image {
+  height: 200px;
+}
+
+.book-form {
+  display: flex;
+  flex-direction: row;
+}

@@ -6,15 +6,7 @@ function BooksShelf({ books, updateShelf }) {
   return (
     <div className="miniwrapper">
       <div className="bookshelf" />
-      <div
-        className="books-container"
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          justifyContent: 'center',
-          padding: '20px'
-        }}
-      >
+      <div className="books-container">
         {books.map(book => (
           <Book key={book.id} book={book} updateShelf={updateShelf} />
         ))}

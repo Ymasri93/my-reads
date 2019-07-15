@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import serializeForm from 'form-serialize';
+import './Book.css';
 
 function Book({ book, updateShelf }) {
   let authors = [];
@@ -26,10 +27,7 @@ function Book({ book, updateShelf }) {
     option => option.value !== book.shelf
   );
   return (
-    <div
-      className={'book'}
-      style={{ display: 'flex', flexDirection: 'column', marginRight: '25px' }}
-    >
+    <div className={'book'}>
       {book.imageLinks && book.imageLinks.smallThumbnail && (
         <Link
           to={{
@@ -40,7 +38,6 @@ function Book({ book, updateShelf }) {
           <img
             alt={book.title}
             className="book-image"
-            style={{ height: '200px' }}
             width={250}
             src={book.imageLinks.smallThumbnail}
           />
@@ -49,10 +46,7 @@ function Book({ book, updateShelf }) {
       <small>{book.title}</small>
       <small>{authors}</small>
       <br />
-      <form
-        style={{ display: 'flex', flexDirection: 'row' }}
-        onSubmit={event => handleSubmit(event)}
-      >
+      <form className={'book-form'} onSubmit={event => handleSubmit(event)}>
         <select name={'shelf'}>
           {displayedOptions.map(option => (
             <option key={option.name} value={option.value}>
