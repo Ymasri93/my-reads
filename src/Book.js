@@ -21,7 +21,11 @@ function Book({ book, updateShelf }) {
       value: 'wantToRead',
       name: 'Want to Read'
     },
-    { value: 'read', name: 'Read' }
+    { value: 'read', name: 'Read' },
+    {
+      value: 'none',
+      name: 'None'
+    }
   ];
   const displayedOptions = options.filter(
     option => option.value !== book.shelf

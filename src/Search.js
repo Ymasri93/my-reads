@@ -14,14 +14,15 @@ class Search extends Component {
   }
 
   updateQuery = query => {
-    console.log('running');
     if (query !== '') {
-      const trimmedQuery = query.trim();
-      this.setState({ query: trimmedQuery }, () => {
+      this.setState({ query }, () => {
+        const trimmedQuery = query.trim();
         search(trimmedQuery).then(books => {
-          this.setState({
-            books
-          });
+          if (Array.isArray(books)) {
+            this.setState({
+              books
+            });
+          }
         });
       });
     } else {
@@ -34,6 +35,7 @@ class Search extends Component {
 
   render() {
     const { query, books } = this.state;
+    const { updateShelf } = this.props;
     return (
       <div>
         <input
@@ -42,7 +44,9 @@ class Search extends Component {
           value={query}
           onChange={event => this.updateQueryThrottled(event.target.value)}
         />
-        {books.length > 0 && <BooksShelf books={books} />}
+        {books.length > 0 && (
+          <BooksShelf books={books} updateShelf={updateShelf} />
+        )}
       </div>
     );
   }
