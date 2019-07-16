@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { search } from './services/BooksApi';
 import BooksShelf from './BooksShelf';
-import { throttle } from 'throttle-debounce';
+import { DebounceInput } from 'react-debounce-input';
 
 class Search extends Component {
   constructor(props) {
@@ -10,7 +10,6 @@ class Search extends Component {
       query: '',
       books: []
     };
-    this.updateQueryThrottled = throttle(50, this.updateQuery);
   }
 
   updateQuery = query => {
@@ -34,15 +33,26 @@ class Search extends Component {
   };
 
   render() {
-    const { query, books } = this.state;
+    const { query } = this.state;
+    let { books } = this.state;
+    const { wantToRead, read, currentlyReading } = this.props;
+
+    books = books.filter(book => {
+      return (
+        !wantToRead.includes(book) &&
+        !read.includes(book) &&
+        !currentlyReading.includes(book)
+      );
+    });
     const { updateShelf } = this.props;
     return (
       <div>
-        <input
+        <DebounceInput
+          debounceTimeout={1000}
           type={'text'}
           placeholder={'Search Book'}
           value={query}
-          onChange={event => this.updateQueryThrottled(event.target.value)}
+          onChange={event => this.updateQuery(event.target.value)}
         />
         {books.length > 0 && (
           <BooksShelf books={books} updateShelf={updateShelf} />

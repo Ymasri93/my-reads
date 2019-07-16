@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import serializeForm from 'form-serialize';
 import './Book.css';
 
 function Book({ book, updateShelf }) {
@@ -8,12 +7,6 @@ function Book({ book, updateShelf }) {
   if (book.authors) {
     authors = `By ${book.authors.join(', ')}`;
   }
-
-  const handleSubmit = e => {
-    e.preventDefault();
-    const values = serializeForm(e.target, { hash: true });
-    updateShelf(book, values.shelf);
-  };
 
   let options = [
     { value: 'currentlyReading', name: 'Currently Reading' },
@@ -50,16 +43,20 @@ function Book({ book, updateShelf }) {
       <small>{book.title}</small>
       <small>{authors}</small>
       <br />
-      <form className={'book-form'} onSubmit={event => handleSubmit(event)}>
-        <select name={'shelf'}>
-          {displayedOptions.map(option => (
-            <option key={option.name} value={option.value}>
-              {option.name}
-            </option>
-          ))}
-        </select>
-        <button>Change status</button>
-      </form>
+      <select
+        name={'shelf'}
+        defaultValue={book.shelf || 'none'}
+        onChange={event => {
+          updateShelf(book, event.target.value);
+        }}
+      >
+        {' '}
+        {displayedOptions.map(option => (
+          <option key={option.name} value={option.value}>
+            {option.name}
+          </option>
+        ))}
+      </select>
     </div>
   );
 }

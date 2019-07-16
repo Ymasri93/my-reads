@@ -72,7 +72,14 @@ class App extends Component {
         <Route
           path={'/search'}
           render={() => {
-            return <Search updateShelf={this.updateShelf} />;
+            return (
+              <Search
+                updateShelf={this.updateShelf}
+                read={read}
+                currentlyReading={currentlyReading}
+                wantToRead={wantToRead}
+              />
+            );
           }}
         />
         <Route path={'/book/:bookId'} component={BookDetails} />
