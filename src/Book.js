@@ -20,9 +20,7 @@ function Book({ book, updateShelf }) {
       name: 'None'
     }
   ];
-  const displayedOptions = options.filter(
-    option => option.value !== book.shelf
-  );
+
   return (
     <div className={'book'}>
       {book.imageLinks && book.imageLinks.smallThumbnail && (
@@ -51,7 +49,7 @@ function Book({ book, updateShelf }) {
         }}
       >
         {' '}
-        {displayedOptions.map(option => (
+        {options.map(option => (
           <option key={option.name} value={option.value}>
             {option.name}
           </option>

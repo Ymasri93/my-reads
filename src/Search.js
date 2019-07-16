@@ -36,13 +36,29 @@ class Search extends Component {
     const { query } = this.state;
     let { books } = this.state;
     const { wantToRead, read, currentlyReading } = this.props;
-
-    books = books.filter(book => {
-      return (
-        !wantToRead.includes(book) &&
-        !read.includes(book) &&
-        !currentlyReading.includes(book)
-      );
+    const shelvedBooks = books.map(book => {
+      wantToRead.find(b => {
+        if (book.id === b.id) {
+          book.shelf = 'wantToRead';
+          return book;
+        }
+        return null;
+      });
+      read.find(b => {
+        if (book.id === b.id) {
+          book.shelf = 'read';
+          return book;
+        }
+        return null;
+      });
+      currentlyReading.find(b => {
+        if (book.id === b.id) {
+          book.shelf = 'currentlyReading';
+          return book;
+        }
+        return null;
+      });
+      return book;
     });
     const { updateShelf } = this.props;
     return (
@@ -55,7 +71,7 @@ class Search extends Component {
           onChange={event => this.updateQuery(event.target.value)}
         />
         {books.length > 0 && (
-          <BooksShelf books={books} updateShelf={updateShelf} />
+          <BooksShelf books={shelvedBooks} updateShelf={updateShelf} />
         )}
       </div>
     );
