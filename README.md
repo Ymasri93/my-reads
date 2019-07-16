@@ -1,7 +1,13 @@
 # My Reads
 A book tracking App.
 
-
+## How To Run this Project Locally
+ Prerequisites: node, npm and git
+ 1) open terminal or CMD(on windows)
+ 2) git clone https://github.com/Ymasri93/my-reads.git
+ 3) cd my-reads
+ 4) npm install
+ 5) npm start
 ## Available Scripts
 
 In the project directory, you can run:

@@ -20,24 +20,26 @@ function Book({ book, updateShelf }) {
       name: 'None'
     }
   ];
+  let imageUrl = 'http://via.placeholder.com/128x193?text=No%20Cover';
+  if (book.imageLinks && book.imageLinks.smallThumbnail) {
+    imageUrl = book.imageLinks.smallThumbnail;
+  }
 
   return (
     <div className={'book'}>
-      {book.imageLinks && book.imageLinks.smallThumbnail && (
-        <Link
-          to={{
-            pathname: `/book/${book.id}`,
-            state: { book }
-          }}
-        >
-          <img
-            alt={book.title}
-            className="book-image"
-            width={250}
-            src={book.imageLinks.smallThumbnail}
-          />
-        </Link>
-      )}
+      <Link
+        to={{
+          pathname: `/book/${book.id}`,
+          state: { book }
+        }}
+      >
+        <img
+          alt={book.title}
+          className="book-image"
+          width={250}
+          src={imageUrl}
+        />
+      </Link>
       <small>{book.title}</small>
       <small>{authors}</small>
       <br />

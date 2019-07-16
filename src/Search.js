@@ -21,6 +21,10 @@ class Search extends Component {
             this.setState({
               books
             });
+          } else {
+            this.setState({
+              books: []
+            });
           }
         });
       });
@@ -64,7 +68,7 @@ class Search extends Component {
     return (
       <div>
         <DebounceInput
-          debounceTimeout={1000}
+          debounceTimeout={300}
           type={'text'}
           placeholder={'Search Book'}
           value={query}
